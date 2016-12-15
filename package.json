@@ -1,0 +1,25 @@
+{
+  "name": "se2lab_170670_exam_2016_12",
+  "version": "1.0.0",
+  "description": "Michele Vantini 170670",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MicheleVantini-1/SE2Lab_Exam_2016_12.git"
+  },
+  "author": "Michele Vantini 170670",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MicheleVantini-1/SE2Lab_Exam_2016_12/issues"
+  },
+  "homepage": "https://github.com/MicheleVantini-1/SE2Lab_Exam_2016_12#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "util": "^0.10.3"
+  }
+}

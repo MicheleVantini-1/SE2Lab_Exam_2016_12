@@ -271,4 +271,79 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-//AGGIUNGERE QUI SOTTO NUOVE FUNZIONI
+/**
+ * @brief search student by mark
+ * @return the list of the student that match with the search query
+ */
+app.post('/searchByMark', function(request, response) 
+{	
+	var headers = {};
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+	headers["Content-Type"] = "application/json";
+
+	var studentList = [];
+	var searchQuery;
+	
+	//checking that the body and the parameter are present in the request
+	if ( typeof request.body !== 'undefined' && request.body)
+	{
+		if ( typeof request.body.criteria !== 'undefined' && request.body.criteria )
+    {
+			 searchQuery = request.body.criteria;
+			 
+			 // checking that the length of the input is 2
+			 // '<' or '>' plus a digit
+			 if(searchQuery.length <= 2)
+			 {
+			 		// checking that the first char is '<' or '>' and that 
+			 		// the second char is a digit
+			 		if((searchQuery[0] === '<' || searchQuery[0] === '>') 
+			 		&& (parseInt(searchQuery[1]) != NaN))
+				  {
+				  	
+				 		var searchCriteria = (searchQuery[0] === '<') ? true : false;
+				 		var searchMark = parseInt(searchQuery[1]);
+				 		
+				 		var list = studentManager.getList();
+				 		
+				 		var len = list.length;
+				 		// looking for students that match the criteria
+				 		for(var i = 0; i < len; i++)
+				 		{
+				 			if(searchCriteria)
+				 			{
+								if(list[i].mark < searchMark)
+								{
+									// if the student matches the criteria we 
+									// add it to the result
+									studentList.push(list[i]);
+								}
+				 			}
+				 			else
+				 			{
+				 				if(list[i].mark > searchMark)
+								{
+									// if the student matches the criteria we 
+									// add it to the result
+									studentList.push(list[i]);
+								}
+				 			}
+				 		} 
+				  } 
+			 }
+			 
+    }
+			
+	}
+	
+	// sending back the list of the students to the client
+	response.writeHead(200, headers);
+	response.end(JSON.stringify(studentList));
+		  
+
+});
+
