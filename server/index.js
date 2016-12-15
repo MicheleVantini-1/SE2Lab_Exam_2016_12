@@ -291,9 +291,9 @@ app.post('/searchByMark', function(request, response)
 	//checking that the body and the parameter are present in the request
 	if ( typeof request.body !== 'undefined' && request.body)
 	{
-		if ( typeof request.body.criteria !== 'undefined' && request.body.criteria )
+		if ( typeof request.body.mark !== 'undefined' && request.body.mark )
     {
-			 searchQuery = request.body.criteria;
+			 searchQuery = request.body.mark;
 			 
 			 // checking that the length of the input is 2
 			 // '<' or '>' plus a digit

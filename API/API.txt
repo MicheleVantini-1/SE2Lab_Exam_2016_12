@@ -18,7 +18,11 @@ paths:
       description: it returns the complete lest of all students in the university
       responses:
         200:
-          description: the home page
+        	description: the list of all the students
+          schema: 
+            type: array
+            items:
+              $ref: "#/definitions/student"
           
   /searchStudent:
     post:
@@ -78,7 +82,7 @@ paths:
       summary: return students that match a criteria
       description: it returns a list of students that match a criteria
       parameters:
-        - name: criteria
+        - name: mark
           in: formData
           description: criteria to be matched
           required: true
